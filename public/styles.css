@@ -1,0 +1,37 @@
+body {
+  color: whitesmoke;
+  background: black;
+  font-family: sans-serif;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+ul {
+  text-decoration: none;
+  list-style-type: none;
+  padding: 0;
+  margin: 1rem;
+}
+
+li {
+  padding: 0.5rem;
+}
+
+a {
+  text-decoration: none;
+  color: whitesmoke;
+}
+
+nav {
+  border: 2px solid whitesmoke;
+  grid-column: 1/2;
+}
+
+section {
+  border: 2px solid whitesmoke;
+  padding: 1rem;
+}
+
+header {
+  padding-left: 1rem;
+}

@@ -1,5 +1,5 @@
 <ul>
   <% content.map((car) => { %>
-  <li><%-car.name%> (<%-car.manufacturer%>)</li>
+  <li><a href="<%-car.url%>"><%-car.name%></a> (<%-car.manufacturer%>)</li>
   <% })%>
 </ul>

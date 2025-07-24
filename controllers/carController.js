@@ -1,3 +1,8 @@
 exports.getHomeCatalog = (req, res) => {
-  res.render('index', { title: 'Car Inventory', home: 'home' });
+  const content = { title: 'Car Inventory' };
+  res.render('index', {
+    title: 'Car Inventory',
+    view: 'home',
+    content: content,
+  });
 };

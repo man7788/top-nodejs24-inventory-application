@@ -8,4 +8,6 @@ catalogRouter.get('/', carController.getHomeCatalog);
 
 catalogRouter.get('/cars', carController.getCarList);
 
+catalogRouter.get('/cars/:id', carController.getCarDetail);
+
 module.exports = catalogRouter;

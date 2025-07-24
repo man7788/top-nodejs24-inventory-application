@@ -6,3 +6,12 @@ exports.getHomeCatalog = (req, res) => {
     content: content,
   });
 };
+
+exports.getCarList = (req, res) => {
+  const content = [{ name: 'Civic', manufacturer: 'Honda' }];
+  res.render('index', {
+    title: 'Car List',
+    view: 'cars/carList',
+    content: content,
+  });
+};

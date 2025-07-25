@@ -1,17 +1,29 @@
 <h1><%=header %></h1>
 <form method="POST" action="create">
   <label for="text">Name:</label><br />
-  <input type="text" id="name" name="name" placeholder='Name of car'/><br />
+  <input type="text" id="name" name="name" placeholder='Name of car'  required='true' value="<%=(undefined===content.car ? '' : content.car.name)%>"/><br />
   <label for="manufacturer">Manufacturer:</label><br />
-  <select id="manufacturer" name="manufacturer">
-    <option value="honda">Honda</option>
+  <select id="manufacturer" name="manufacturer" required='true'>
+    <% content.manufacturers.forEach((manufacturer)=>{ %>
+      <% if (content.car) { %>
+      <option value="<%= manufacturer.id%>" selected="<%(manufacturer.id.toString()===content.car.manufacturer.toString() ? 'selected' : false )%>" ><%= manufacturer.name%></option>
+      <% } else { %>
+      <option value="<%= manufacturer.id%>"><%= manufacturer.name%></option>
+      <% } %>
+    <% }) %>
   </select><br />
-   <label for="bodystyle">Body Style:</label><br />
-  <select id="bodystyle" name="bodystyle">
-    <option value="sedan">Sedan</option>
+  <label for="bodystyle">Body Style:</label><br />
+  <select id="bodystyle" name="bodystyle" required='true'>
+     <% content.bodyStyles.forEach((bodyStyle)=>{ %>
+      <% if (content.car) { %>
+      <option value="<%= bodyStyle.id%>" selected="<%(bodyStyle.id.toString()===content.car.bodyStyle.toString() ? 'selected' : false )%>" ><%= bodyStyle.type%></option>
+      <% } else { %>
+      <option value="<%= bodyStyle.id%>"><%= bodyStyle.type%></option>
+      <% } %>
+    <% }) %>
   </select><br />
   <label for="price">Price:</label><br />
-  <input type="number" id="price" name="price" placeholder='Price of car'/>
+  <input type="number" id="price" name="price" placeholder='Price of car' required='true' value="<%=(undefined===content.car ? '' : content.car.price)%>"/>
   <br></br>
   <button type="submit">Submit</button>
 </form>

@@ -12,6 +12,7 @@ exports.getCarList = (req, res) => {
   const content = [{ name: 'Civic', manufacturer: 'Honda', url: 'cars/1' }];
   res.render('index', {
     title: 'Car List',
+    header: 'Car List',
     view: 'cars/carList',
     content: content,
   });

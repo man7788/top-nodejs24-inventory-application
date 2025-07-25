@@ -9,7 +9,7 @@ exports.getHomeCatalog = (req, res) => {
 };
 
 exports.getCarList = (req, res) => {
-  const content = [{ name: 'Civic', manufacturer: 'Honda', url: 'cars/1' }];
+  const content = [{ id: 1, name: 'Civic', manufacturer: 'Honda' }];
   res.render('index', {
     title: 'Car List',
     header: 'Car List',
@@ -20,6 +20,7 @@ exports.getCarList = (req, res) => {
 
 exports.getCarDetail = (req, res) => {
   const content = {
+    id: 1,
     name: 'Civic',
     manufacturer: 'Honda',
     bodyStyle: 'Sedan',
@@ -38,6 +39,32 @@ exports.getCarCreate = (req, res) => {
     title: `Create Car`,
     header: `Create Car`,
     view: 'cars/carForm',
-    content: {},
+    content: content,
+  });
+};
+
+exports.getCarUpdate = (req, res) => {
+  // Sort queries from database
+  const content = {
+    manufacturers: [
+      { id: 1, name: 'Honda' },
+      { id: 2, name: 'Toyota' },
+    ],
+    bodyStyles: [
+      { id: 1, type: 'Sedan' },
+      { id: 2, type: 'Coupe' },
+    ],
+    car: {
+      name: 'MR2',
+      manufacturer: 2,
+      bodyStyle: 2,
+      price: 100000,
+    },
+  };
+  res.render('index', {
+    title: `Update Car`,
+    header: `Update Car`,
+    view: 'cars/carForm',
+    content: content,
   });
 };

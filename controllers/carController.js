@@ -2,6 +2,7 @@ exports.getHomeCatalog = (req, res) => {
   const content = { title: 'Car Inventory' };
   res.render('index', {
     title: 'Car Inventory',
+    header: 'Car Inventory',
     view: 'home',
     content: content,
   });
@@ -24,7 +25,7 @@ exports.getCarDetail = (req, res) => {
     price: 100000,
   };
   res.render('index', {
-    title: `Car: ${content.name}`,
+    title: 'Car Detail',
     view: 'cars/carDetail',
     content: content,
   });

@@ -35,7 +35,8 @@ exports.getCarDetail = (req, res) => {
 
 exports.getCarCreate = (req, res) => {
   res.render('index', {
-    title: `Car Create`,
+    title: `Create Car`,
+    header: `Create Car`,
     view: 'cars/carForm',
     content: {},
   });

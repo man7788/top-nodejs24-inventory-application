@@ -2,7 +2,6 @@ exports.getHomeCatalog = (req, res) => {
   const content = { title: 'Car Inventory' };
   res.render('index', {
     title: 'Car Inventory',
-    header: 'Car Inventory',
     view: 'home',
     content: content,
   });
@@ -12,7 +11,6 @@ exports.getCarList = (req, res) => {
   const content = [{ id: 1, name: 'Civic', manufacturer: 'Honda' }];
   res.render('index', {
     title: 'Car List',
-    header: 'Car List',
     view: 'cars/carList',
     content: content,
   });
@@ -28,16 +26,24 @@ exports.getCarDetail = (req, res) => {
   };
   res.render('index', {
     title: 'Car Detail',
-    header: `Car: ${content.name}`,
     view: 'cars/carDetail',
     content: content,
   });
 };
 
 exports.getCarCreate = (req, res) => {
+  content = {
+    manufacturers: [
+      { id: 1, name: 'Honda' },
+      { id: 2, name: 'Toyota' },
+    ],
+    bodyStyles: [
+      { id: 1, type: 'Sedan' },
+      { id: 2, type: 'Coupe' },
+    ],
+  };
   res.render('index', {
     title: `Create Car`,
-    header: `Create Car`,
     view: 'cars/carForm',
     content: content,
   });
@@ -63,7 +69,6 @@ exports.getCarUpdate = (req, res) => {
   };
   res.render('index', {
     title: `Update Car`,
-    header: `Update Car`,
     view: 'cars/carForm',
     content: content,
   });

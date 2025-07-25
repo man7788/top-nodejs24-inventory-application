@@ -12,4 +12,6 @@ catalogRouter.get('/cars/create', carController.getCarCreate);
 
 catalogRouter.get('/cars/:id', carController.getCarDetail);
 
+catalogRouter.get('/cars/:id/update', carController.getCarUpdate);
+
 module.exports = catalogRouter;

@@ -27,6 +27,7 @@ exports.getCarDetail = (req, res) => {
   };
   res.render('index', {
     title: 'Car Detail',
+    header: `Car: ${content.name}`,
     view: 'cars/carDetail',
     content: content,
   });

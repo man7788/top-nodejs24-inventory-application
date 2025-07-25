@@ -29,3 +29,11 @@ exports.getCarDetail = (req, res) => {
     content: content,
   });
 };
+
+exports.getCarCreate = (req, res) => {
+  res.render('index', {
+    title: `Car Create`,
+    view: 'cars/carForm',
+    content: {},
+  });
+};

@@ -1,3 +1,27 @@
+const { body, validationResult } = require('express-validator');
+
+const nameErr = 'must be between 1 and 255 characters.';
+const numErr = 'must be between 1 and 1000000000.';
+
+const validateCar = [
+  body('name')
+    .trim()
+    .isLength({ min: 1, max: 255 })
+    .withMessage(`Name ${nameErr}`),
+  body('manufacturer')
+    .trim()
+    .isInt({ min: 1, max: 1000000000 })
+    .withMessage(`Manufacturer ${numErr}`),
+  body('bodystyle')
+    .trim()
+    .isInt({ min: 1, max: 1000000000 })
+    .withMessage(`Body Style ${numErr}`),
+  body('price')
+    .trim()
+    .isInt({ min: 1, max: 1000000000 })
+    .withMessage(`Price ${numErr}`),
+];
+
 exports.getHomeCatalog = (req, res) => {
   const content = { title: 'Car Inventory' };
   res.render('index', {
@@ -48,6 +72,36 @@ exports.getCarCreate = (req, res) => {
     content: content,
   });
 };
+
+exports.postCarCreate = [
+  validateCar,
+  (req, res) => {
+    const errors = validationResult(req);
+
+    content = {
+      manufacturers: [
+        { id: 1, name: 'Honda' },
+        { id: 2, name: 'Toyota' },
+      ],
+      bodyStyles: [
+        { id: 1, type: 'Sedan' },
+        { id: 2, type: 'Coupe' },
+      ],
+      errors: errors.array(),
+    };
+
+    if (!errors.isEmpty()) {
+      return res.status(400).render('index', {
+        title: 'Create Car',
+        view: 'cars/carForm',
+        content: content,
+      });
+    }
+
+    const { name, manufacturer, bodystyle, price } = req.body;
+    res.send({ name, manufacturer, bodystyle, price });
+  },
+];
 
 exports.getCarUpdate = (req, res) => {
   // Sort queries from database

@@ -27,4 +27,11 @@
   <br></br>
   <button type="submit">Submit</button>
 </form>
+<% if (content.errors) {%>
+<ul>
+  <%content.errors.forEach((error)=>{%>
+  <li><%= error.msg %></li>
+  <%})%>
+</ul>
+<%}%>
 

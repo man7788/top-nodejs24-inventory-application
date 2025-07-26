@@ -14,4 +14,6 @@ catalogRouter.get('/cars/:id', carController.getCarDetail);
 
 catalogRouter.get('/cars/:id/update', carController.getCarUpdate);
 
+catalogRouter.get('/cars/:id/delete', carController.getCarDelete);
+
 module.exports = catalogRouter;

@@ -73,3 +73,33 @@ exports.getCarUpdate = (req, res) => {
     content: content,
   });
 };
+
+exports.getCarDelete = (req, res) => {
+  const content = {
+    car: {
+      id: 1,
+      name: 'Civic',
+      manufacturer: 'Honda',
+      bodyStyle: 'Sedan',
+      price: 100000,
+    },
+    carInstances: [],
+    // carInstances: [
+    //   {
+    //     id: 1,
+    //     productionDate: new Date(),
+    //     soldDate: new Date(),
+    //   },
+    //   {
+    //     id: 2,
+    //     productionDate: new Date(),
+    //     soldDate: null,
+    //   },
+    // ],
+  };
+  res.render('index', {
+    title: `Delete Car`,
+    view: 'cars/carDelete',
+    content: content,
+  });
+};

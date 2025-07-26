@@ -1,0 +1,22 @@
+<h1><%=title %>: <%=content.car.name %></h1>
+<h3><%=content.car.manufacturer %> - <%=content.car.bodyStyle %></h3>
+<% if (content.carInstances.length > 0) {%>
+<p>Delete the following car instances before attempting to delete this car.</p>
+<dl></dl>
+<% content.carInstances.forEach((instance)=>{ %>
+<hr />
+<dt>
+  <span
+    >id: <a href="/catalog/carinstances/<%=instance.id %>"><%=instance.id %></a>
+  </span>
+</dt>
+<dd>Production Date: <%=instance.productionDate %></dd>
+<% if (instance.soldDate) { %>
+<dd>Sold Date: <%=instance.soldDate %></dd>
+<% } %> <% })%> <% } else { %>
+<p>Do you really want to delete this car?</p>
+<form method="POST" action="delete">
+  <input type="hidden" name="carid" required="true" value="content.id" />
+  <button type="submit">Submit</button>
+</form>
+<% } %>

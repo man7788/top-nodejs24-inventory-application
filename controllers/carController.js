@@ -128,6 +128,42 @@ exports.getCarUpdate = (req, res) => {
   });
 };
 
+exports.postCarUpdate = [
+  validateCar,
+  (req, res) => {
+    const errors = validationResult(req);
+
+    content = {
+      manufacturers: [
+        { id: 1, name: 'Honda' },
+        { id: 2, name: 'Toyota' },
+      ],
+      bodyStyles: [
+        { id: 1, type: 'Sedan' },
+        { id: 2, type: 'Coupe' },
+      ],
+      car: {
+        name: 'MR2',
+        manufacturer: 2,
+        bodyStyle: 2,
+        price: 100000,
+      },
+      errors: errors.array(),
+    };
+
+    if (!errors.isEmpty()) {
+      return res.status(400).render('index', {
+        title: 'Create Car',
+        view: 'cars/carForm',
+        content: content,
+      });
+    }
+
+    const { name, manufacturer, bodystyle, price } = req.body;
+    res.send({ name, manufacturer, bodystyle, price });
+  },
+];
+
 exports.getCarDelete = (req, res) => {
   const content = {
     car: {

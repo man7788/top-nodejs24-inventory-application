@@ -24,5 +24,9 @@ catalogRouter.get(
   '/carinstances/:id',
   carInstanceController.getCarInstanceDetail
 );
+catalogRouter.get(
+  '/carinstances/:id/delete',
+  carInstanceController.getCarInstanceDelete
+);
 
 module.exports = catalogRouter;

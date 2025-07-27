@@ -1,6 +1,26 @@
-<h1>Car: <%=content.name %></h1>
-<p>Manufacturer: <%= content.manufacturer%></p>
-<p>Body Style: <%= content.bodyStyle%></p>
-<p>Price: <%= content.price%></p>
-<a href="<%=content.id%>/update">Update Car</a><br />
-<a href="<%=content.id%>/delete">Delete Car</a>
+<h1>Car: <%=content.car.name %></h1>
+<p><strong>Manufacturer: <%= content.car.manufacturer%></strong></p>
+<p><strong>Body Style: <%= content.car.bodyStyle%></strong></p>
+<p><strong>Price: <%= content.car.price%></strong></p>
+<h4>Stock</h4>
+<%if (content.carInstances.length > 0) { %> <%
+content.carInstances.map((instance) => { %>
+<hr />
+<% if (instance.car.soldDate === undefined) {%>
+<p>Available</p>
+<% } else {%>
+<p>Sold</p>
+<% } %>
+<p><strong>Production Date: <%= instance.car.productionDate %></strong></p>
+<%if (instance.car.soldDate) { %>
+<p><strong>Sold Date: <%- instance.car.soldDate %></strong></p>
+<% } %>
+<a href="/catalog/carinstances/<%-instance.car.id%>"
+  >Id: <%- instance.car.id %></a
+>
+<% })%> <% } else { %>
+<li>There are no cars.</li>
+<% } %>
+<hr />
+<a href="/catalog/cars/<%=content.car.id%>/update">Update Car</a><br />
+<a href="/catalog/cars/<%=content.car.id%>/delete">Delete Car</a>

@@ -23,7 +23,14 @@ const validateCar = [
 ];
 
 exports.getHomeCatalog = (req, res) => {
-  const content = { title: 'Car Inventory' };
+  const content = {
+    title: 'Car Inventory',
+    cars: 10,
+    carInstances: 20,
+    carInstancesAvailable: 30,
+    manufacturers: 40,
+    bodyStyles: 50,
+  };
   res.render('index', {
     title: 'Car Inventory',
     view: 'home',
@@ -42,11 +49,26 @@ exports.getCarList = (req, res) => {
 
 exports.getCarDetail = (req, res) => {
   const content = {
-    id: 1,
-    name: 'Civic',
-    manufacturer: 'Honda',
-    bodyStyle: 'Sedan',
-    price: 100000,
+    car: {
+      id: 1,
+      name: 'Civic',
+      manufacturer: 'Honda',
+      bodyStyle: 'Sedan',
+      price: 100000,
+    },
+    carInstances: [
+      {
+        car: {
+          id: 100,
+          name: 'Civic',
+          manufacturer: 'Honda',
+          bodyStyle: 'Sedan',
+          price: 100000,
+          productionDate: new Date(),
+          soldDate: new Date(),
+        },
+      },
+    ],
   };
   res.render('index', {
     title: 'Car Detail',

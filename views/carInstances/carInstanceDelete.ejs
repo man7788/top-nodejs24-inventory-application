@@ -1,0 +1,15 @@
+<h1><%= title %>: <%= content.id%></h1>
+<h3>Production Date: <%= content.productionDate%></h3>
+<% if (content.soldDate) { %>
+<h3>Sold Date: <%= content.soldDate %></h3>
+<% } %>
+<p>Do you really want to delete this Car Instance?</p>
+<form method="POST" action="">
+  <input
+    type="hidden"
+    name="carinstanceid"
+    required="true"
+    value="<%=content.id%>"
+  />
+  <button type="submit">Delete</button>
+</form>

@@ -1,5 +1,10 @@
 <h1><%=title %></h1>
 <p>Welcome to <em><%=title %></em></p>
+<p>The inventory has the following record counts:</p>
 <ul>
-  <li><strong>Type of Cars:</strong>100</li>
+  <li><strong>Type of Cars: </strong><%=content.cars%></li>
+  <li><strong>Cars in stock: </strong><%=content.carInstances%></li>
+  <li><strong>Cars Available: </strong><%=content.carInstancesAvailable%></li>
+  <li><strong>Manufacturers: </strong><%=content.manufacturers%></li>
+  <li><strong>Body Styles: </strong><%=content.bodyStyles%></li>
 </ul>

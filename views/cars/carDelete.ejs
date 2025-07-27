@@ -16,7 +16,12 @@
 <% } %> <% })%> <% } else { %>
 <p>Do you really want to delete this car?</p>
 <form method="POST" action="">
-  <input type="hidden" name="carid" required="true" value="content.id" />
+  <input
+    type="hidden"
+    name="carid"
+    required="true"
+    value="<%=content.car.id%>"
+  />
   <button type="submit">Submit</button>
 </form>
 <% } %>

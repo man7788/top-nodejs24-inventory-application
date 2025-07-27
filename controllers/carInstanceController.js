@@ -31,3 +31,16 @@ exports.getCarInstanceDelete = (req, res) => {
     content: content,
   });
 };
+
+exports.postCarInstanceDelete = (req, res) => {
+  content = {
+    id: 1,
+    name: 'Civic',
+    price: 100000,
+    manufacturer: 'Honda',
+    bodyStyle: 'Sedan',
+    productionDate: new Date(),
+    soldDate: new Date(),
+  };
+  res.send(req.body.carinstanceid);
+};

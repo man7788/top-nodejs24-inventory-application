@@ -1,7 +1,13 @@
 <h1><%=title %>: <%=content.car.name %></h1>
 <h3><%=content.car.manufacturer %> - <%=content.car.bodyStyle %></h3>
 <% if (content.carInstances.length > 0) {%>
-<p>Delete the following car instances before attempting to delete this car.</p>
+<p>
+  <strong
+    >Delete the following car instances before attempting to delete this
+    car.</strong
+  >
+</p>
+<h4>Car Instances</h4>
 <dl></dl>
 <% content.carInstances.forEach((instance)=>{ %>
 <hr />

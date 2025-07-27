@@ -18,6 +18,7 @@ catalogRouter.get('/cars/:id/update', carController.getCarUpdate);
 catalogRouter.post('/cars/:id/update', carController.postCarUpdate);
 
 catalogRouter.get('/cars/:id/delete', carController.getCarDelete);
+catalogRouter.post('/cars/:id/delete', carController.postCarDelete);
 
 // CAR INSTANCES ROUTES //
 catalogRouter.get(

@@ -193,3 +193,7 @@ exports.getCarDelete = (req, res) => {
     content: content,
   });
 };
+
+exports.postCarDelete = (req, res) => {
+  res.send(req.body.carid);
+};

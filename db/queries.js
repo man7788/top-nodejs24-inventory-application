@@ -23,7 +23,22 @@ exports.readHomeCounts = async () => {
 };
 
 exports.readCarList = async () => {
-  const queries = `SELECT * FROM cars;`;
+  const queries = `
+  SELECT 
+    cars.id AS id, 
+    cars.name AS name, 
+    manufacturers.name AS manufacturer 
+  FROM 
+    cars
+  INNER JOIN 
+    body_styles
+  ON 
+    cars.body_style_id = body_styles.id
+  INNER JOIN 
+    manufacturers 
+  ON 
+    cars.manufacturer_id = manufacturers.id;
+  `;
   const { rows } = await pool.query(queries);
   return rows;
 };

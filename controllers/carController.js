@@ -1,3 +1,4 @@
+const db = require('../db/queries');
 const { body, validationResult } = require('express-validator');
 
 const nameErr = 'must be between 1 and 255 characters.';
@@ -22,19 +23,13 @@ const validateCar = [
     .withMessage(`Price ${numErr}`),
 ];
 
-exports.getHomeCatalog = (req, res) => {
-  const content = {
-    title: 'Car Inventory',
-    cars: 10,
-    carInstances: 20,
-    carInstancesAvailable: 30,
-    manufacturers: 40,
-    bodyStyles: 50,
-  };
+exports.getHomeCatalog = async (req, res) => {
+  const result = await db.getHomeCounts();
+
   res.render('index', {
     title: 'Car Inventory',
     view: 'home',
-    content: content,
+    content: result[0],
   });
 };
 

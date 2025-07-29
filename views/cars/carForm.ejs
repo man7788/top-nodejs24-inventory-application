@@ -11,17 +11,17 @@
       <% if (content.car) { %>
       <option value="<%= manufacturer.id%>" selected="<%(manufacturer.id.toString()===content.car.manufacturer.toString() ? 'selected' : false )%>" ><%= manufacturer.name%></option>
       <% } else { %>
-      <option value="<%= manufacturer.id%>"><%= manufacturer.name%></option>
+      <option value="<%= manufacturer %>"><%= manufacturer %></option>
       <% } %>
     <% }) %>
   </select><br />
   <label for="bodystyle">Body Style:</label><br />
   <select id="bodystyle" name="bodystyle" required='true'>
-     <% content.bodyStyles.forEach((bodyStyle)=>{ %>
+     <% content.body_styles.forEach((bodyStyle)=>{ %>
       <% if (content.car) { %>
       <option value="<%= bodyStyle.id%>" selected="<%(bodyStyle.id.toString()===content.car.bodyStyle.toString() ? 'selected' : false )%>" ><%= bodyStyle.type%></option>
       <% } else { %>
-      <option value="<%= bodyStyle.id%>"><%= bodyStyle.type%></option>
+      <option value="<%= bodyStyle %>"><%= bodyStyle %></option>
       <% } %>
     <% }) %>
   </select><br />

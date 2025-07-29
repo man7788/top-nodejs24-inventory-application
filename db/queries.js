@@ -54,3 +54,15 @@ exports.readCarDetail = async (carId) => {
   const { rows } = await pool.query(queries, values);
   return rows;
 };
+
+exports.readCarFormOptions = async (carId) => {
+  const queries = `
+    SELECT
+      json_agg(DISTINCT manufacturer ORDER BY manufacturer) AS manufacturers,
+      json_agg(DISTINCT body_style ORDER BY body_style) AS body_styles
+    FROM
+      cars;
+    `;
+  const { rows } = await pool.query(queries);
+  return rows;
+};

@@ -4,14 +4,26 @@ require('dotenv').config();
 const { Client } = require('pg');
 
 const SQL = `
+DROP TABLE IF EXISTS manufacturers CASCADE;
+DROP TABLE IF EXISTS body_styles CASCADE;
 DROP TABLE IF EXISTS cars CASCADE;
 DROP TABLE IF EXISTS car_instances;
+
+CREATE TABLE IF NOT EXISTS manufacturers (
+  id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  name VARCHAR ( 255 )
+);
+
+CREATE TABLE IF NOT EXISTS body_styles (
+  id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  name VARCHAR ( 255 )
+);
 
 CREATE TABLE IF NOT EXISTS cars (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   name VARCHAR ( 255 ),
-  manufacturer VARCHAR ( 255 ),
-  body_style VARCHAR ( 255 ),
+  manufacturer_id INTEGER REFERENCES manufacturers(id),
+  body_style_id INTEGER REFERENCES body_styles(id),
   price INTEGER
 );
 
@@ -22,13 +34,26 @@ CREATE TABLE IF NOT EXISTS car_instances (
   sold_date DATE
 );
 
-INSERT INTO cars (name, manufacturer, body_style, price) 
+INSERT INTO manufacturers (name) 
 VALUES
-  ('Civic', 'Honda', 'Coupe', 1500),
-  ('Corolla', 'Toyota', 'Sedan', 2500 ),
-  ('M3', 'BMW', 'Sedan', 3500 ),
-  ('Mustang', 'Ford', 'Coupe', 4500 ),
-  ('Roma', 'Ferrari', 'Coupe', 5500 );
+  ('Honda'),
+  ('Toyota'),
+  ('BMW'),
+  ('Ford'),
+  ('Ferrari');
+
+INSERT INTO body_styles (name) 
+VALUES
+  ('Coupe'),
+  ('Sedan');
+
+INSERT INTO cars (name, manufacturer_id, body_style_id, price) 
+VALUES
+  ('Civic', 1, 1, 1500),
+  ('Corolla', 2, 2, 2500 ),
+  ('M3', 3, 2, 3500 ),
+  ('Mustang', 4, 1, 4500 ),
+  ('Roma', 5, 1, 5500 );
 
 INSERT INTO car_instances (car_id, production_date, sold_date) 
 VALUES

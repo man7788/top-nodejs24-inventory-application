@@ -7,10 +7,10 @@ exports.readHomeCounts = async () => {
   (SELECT COUNT(*) FROM cars) AS total_cars,
 
   -- Total number of distinct body styles
-  (SELECT COUNT(DISTINCT body_style) FROM cars) AS total_body_styles,
+  (SELECT COUNT(name) FROM body_styles) AS total_body_styles,
 
   -- Total number of distinct manufacturers
-  (SELECT COUNT(DISTINCT manufacturer) FROM cars) AS total_manufacturers,
+  (SELECT COUNT(name) FROM manufacturers) AS total_manufacturers,
 
   -- Total number of car instances
   (SELECT COUNT(*) FROM car_instances) AS total_car_instances,

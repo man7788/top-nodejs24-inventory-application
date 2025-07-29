@@ -1,7 +1,10 @@
 <h1><%=title %></h1>
 <ul>
   <%if (content.length > 0) {%> <% content.map((car) => { %>
-  <li><a href="cars/<%-car.id%>"><%=car.name%></a> (<%=car.manufacturer%>)</li>
+  <li>
+    <a href="/catalog/cars/<%-car.id%>"><%=car.name%></a>
+    (<%=car.manufacturer%>)
+  </li>
   <% })%> <% } else { %>
   <li>There are no cars.</li>
   <% } %>

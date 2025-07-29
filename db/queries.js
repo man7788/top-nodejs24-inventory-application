@@ -46,7 +46,11 @@ exports.readCarList = async () => {
 exports.readCarDetail = async (carId) => {
   const queries = `
   SELECT 
-    cars.*,  -- All columns from the 'cars' table
+    cars.id AS id,
+    cars.name AS name,
+    manufacturers.name AS manufacturer,
+    body_styles.name AS body_style,
+    cars.price AS price,
     json_agg(
       jsonb_build_object(
         'id', car_instances.id,
@@ -57,13 +61,23 @@ exports.readCarDetail = async (carId) => {
   FROM 
     cars
   LEFT JOIN 
+    manufacturers
+  ON 
+    cars.manufacturer_id = manufacturers.id
+  LEFT JOIN 
+    body_styles
+  ON 
+    cars.body_style_id = body_styles.id  
+  LEFT JOIN 
     car_instances 
   ON 
     cars.id = car_instances.car_id
   WHERE 
     cars.id = $1
   GROUP BY 
-    cars.id;
+    cars.id,
+    manufacturers.name,
+    body_styles.name;
   `;
   const values = [carId];
   const { rows } = await pool.query(queries, values);

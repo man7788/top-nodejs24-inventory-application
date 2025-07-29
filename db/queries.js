@@ -21,8 +21,36 @@ exports.readHomeCounts = async () => {
   const { rows } = await pool.query(queries);
   return rows;
 };
+
 exports.readCarList = async () => {
   const queries = `SELECT * FROM cars;`;
   const { rows } = await pool.query(queries);
+  return rows;
+};
+
+exports.readCarDetail = async (carId) => {
+  const queries = `
+  SELECT 
+    cars.*,  -- All columns from the 'cars' table
+    json_agg(
+      jsonb_build_object(
+        'id', car_instances.id,
+        'production_date', car_instances.production_date,
+        'sold_date', car_instances.sold_date
+      )
+    ) AS car_instances  -- Aggregates car_instances as a JSON array
+  FROM 
+    cars
+  LEFT JOIN 
+    car_instances 
+  ON 
+    cars.id = car_instances.car_id
+  WHERE 
+    cars.id = $1
+  GROUP BY 
+    cars.id;
+  `;
+  const values = [carId];
+  const { rows } = await pool.query(queries, values);
   return rows;
 };

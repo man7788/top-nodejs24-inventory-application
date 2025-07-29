@@ -24,7 +24,7 @@ const validateCar = [
 ];
 
 exports.getHomeCatalog = async (req, res) => {
-  const result = await db.getHomeCounts();
+  const result = await db.readHomeCounts();
 
   res.render('index', {
     title: 'Car Inventory',
@@ -33,12 +33,13 @@ exports.getHomeCatalog = async (req, res) => {
   });
 };
 
-exports.getCarList = (req, res) => {
-  const content = [{ id: 1, name: 'Civic', manufacturer: 'Honda' }];
+exports.getCarList = async (req, res) => {
+  const result = await db.readCarList();
+
   res.render('index', {
     title: 'Car List',
     view: 'cars/carList',
-    content: content,
+    content: result,
   });
 };
 

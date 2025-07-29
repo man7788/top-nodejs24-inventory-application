@@ -1,6 +1,6 @@
 const pool = require('./pool');
 
-exports.getHomeCounts = async () => {
+exports.readHomeCounts = async () => {
   const queries = `
   SELECT
   -- Total number of cars
@@ -18,6 +18,11 @@ exports.getHomeCounts = async () => {
   -- Total number of cars without a sold date
   (SELECT COUNT(*) FROM car_instances WHERE sold_date IS NULL) AS total_available_cars;
   `;
+  const { rows } = await pool.query(queries);
+  return rows;
+};
+exports.readCarList = async () => {
+  const queries = `SELECT * FROM cars;`;
   const { rows } = await pool.query(queries);
   return rows;
 };

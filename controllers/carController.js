@@ -43,33 +43,12 @@ exports.getCarList = async (req, res) => {
   });
 };
 
-exports.getCarDetail = (req, res) => {
-  const content = {
-    car: {
-      id: 1,
-      name: 'Civic',
-      manufacturer: 'Honda',
-      bodyStyle: 'Sedan',
-      price: 100000,
-    },
-    carInstances: [
-      {
-        car: {
-          id: 100,
-          name: 'Civic',
-          manufacturer: 'Honda',
-          bodyStyle: 'Sedan',
-          price: 100000,
-          productionDate: new Date(),
-          soldDate: new Date(),
-        },
-      },
-    ],
-  };
+exports.getCarDetail = async (req, res) => {
+  const result = await db.readCarDetail(Number(req.params.id));
   res.render('index', {
     title: 'Car Detail',
     view: 'cars/carDetail',
-    content: content,
+    content: { car: result[0], carInstances: result[0].car_instances },
   });
 };
 

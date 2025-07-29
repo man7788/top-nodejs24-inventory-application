@@ -52,21 +52,12 @@ exports.getCarDetail = async (req, res) => {
   });
 };
 
-exports.getCarCreate = (req, res) => {
-  content = {
-    manufacturers: [
-      { id: 1, name: 'Honda' },
-      { id: 2, name: 'Toyota' },
-    ],
-    bodyStyles: [
-      { id: 1, type: 'Sedan' },
-      { id: 2, type: 'Coupe' },
-    ],
-  };
+exports.getCarCreate = async (req, res) => {
+  const result = await db.readCarFormOptions();
   res.render('index', {
     title: `Create Car`,
     view: 'cars/carForm',
-    content: content,
+    content: result[0],
   });
 };
 

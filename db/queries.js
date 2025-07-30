@@ -84,13 +84,26 @@ exports.readCarDetail = async (carId) => {
   return rows;
 };
 
-exports.readCarFormOptions = async (carId) => {
+exports.readCarFormOptions = async () => {
   const queries = `
     SELECT
-      json_agg(DISTINCT manufacturer ORDER BY manufacturer) AS manufacturers,
-      json_agg(DISTINCT body_style ORDER BY body_style) AS body_styles
-    FROM
-      cars;
+      (
+        SELECT json_agg(jsonb_build_object('id', id, 'name', name) ORDER BY name)
+        FROM (
+          SELECT DISTINCT manufacturers.id, manufacturers.name
+          FROM cars
+          LEFT JOIN manufacturers ON cars.manufacturer_id = manufacturers.id
+        ) AS m
+      ) AS manufacturers,
+
+      (
+        SELECT json_agg(jsonb_build_object('id', id, 'name', name) ORDER BY name)
+        FROM (
+          SELECT DISTINCT body_styles.id, body_styles.name
+          FROM cars
+          LEFT JOIN body_styles ON cars.body_style_id = body_styles.id
+        ) AS b
+      ) AS body_styles;
     `;
   const { rows } = await pool.query(queries);
   return rows;

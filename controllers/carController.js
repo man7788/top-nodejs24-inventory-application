@@ -58,36 +58,28 @@ exports.getCarCreate = async (req, res) => {
     title: `Create Car`,
     view: 'cars/carForm',
     content: result[0],
+    errors: null,
   });
 };
 
 exports.postCarCreate = [
   validateCar,
-  (req, res) => {
+  async (req, res) => {
     const errors = validationResult(req);
 
-    content = {
-      manufacturers: [
-        { id: 1, name: 'Honda' },
-        { id: 2, name: 'Toyota' },
-      ],
-      bodyStyles: [
-        { id: 1, type: 'Sedan' },
-        { id: 2, type: 'Coupe' },
-      ],
-      errors: errors.array(),
-    };
-
     if (!errors.isEmpty()) {
+      const result = await db.readCarFormOptions();
       return res.status(400).render('index', {
         title: 'Create Car',
         view: 'cars/carForm',
-        content: content,
+        content: result[0],
+        errors: errors.array(),
       });
     }
 
     const { name, manufacturer, bodystyle, price } = req.body;
-    res.send({ name, manufacturer, bodystyle, price });
+    const created = await db.createCar(name, manufacturer, bodystyle, price);
+    res.redirect(`/catalog/cars/${created[0].id}`);
   },
 ];
 

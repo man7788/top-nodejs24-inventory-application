@@ -149,6 +149,7 @@ exports.getCarDelete = async (req, res) => {
   });
 };
 
-exports.postCarDelete = (req, res) => {
-  res.send(req.body.carid);
+exports.postCarDelete = async (req, res) => {
+  await db.deleteCar(Number(req.body.carid));
+  res.redirect('/catalog/cars');
 };

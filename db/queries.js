@@ -37,7 +37,9 @@ exports.readCarList = async () => {
   INNER JOIN 
     manufacturers 
   ON 
-    cars.manufacturer_id = manufacturers.id;
+    cars.manufacturer_id = manufacturers.id
+  ORDER BY
+    cars.name;
   `;
   const { rows } = await pool.query(queries);
   return rows;

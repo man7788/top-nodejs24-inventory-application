@@ -87,26 +87,14 @@ exports.postCarCreate = [
 ];
 
 exports.getCarUpdate = async (req, res) => {
-  // Sort queries from database
-  const content = {
-    manufacturers: [
-      { id: 1, name: 'Honda' },
-      { id: 2, name: 'Toyota' },
-    ],
-    bodyStyles: [
-      { id: 1, type: 'Sedan' },
-      { id: 2, type: 'Coupe' },
-    ],
-    car: {
-      name: 'MR2',
-      manufacturer: 2,
-      bodyStyle: 2,
-      price: 100000,
-    },
-  };
-
   const options = await db.readCarFormOptions();
   const car = await db.readCarDetail(Number(req.params.id));
+
+  const content = {
+    manufacturers: options[0].manufacturers,
+    body_styles: options[0].body_styles,
+    car: car[0],
+  };
 
   res.render('index', {
     title: `Update Car`,

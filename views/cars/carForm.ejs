@@ -9,9 +9,9 @@
   <select id="manufacturer" name="manufacturer" required='true'>
     <% content.manufacturers.forEach((manufacturer)=>{ %>
       <% if (content.car) { %>
-      <option value="<%= manufacturer.id%>" selected="<%(manufacturer.id.toString()===content.car.manufacturer.toString() ? 'selected' : false )%>" ><%= manufacturer.name%></option>
+      <option value="<%= manufacturer.id %>" selected="<%(manufacturer.id.toString()===content.car.manufacturer.toString() ? 'selected' : false )%>" ><%= manufacturer.name%></option>
       <% } else { %>
-      <option value="<%= manufacturer %>"><%= manufacturer %></option>
+      <option value="<%= manufacturer.id %>"><%= manufacturer.name %></option>
       <% } %>
     <% }) %>
   </select><br />
@@ -21,7 +21,7 @@
       <% if (content.car) { %>
       <option value="<%= bodyStyle.id%>" selected="<%(bodyStyle.id.toString()===content.car.bodyStyle.toString() ? 'selected' : false )%>" ><%= bodyStyle.type%></option>
       <% } else { %>
-      <option value="<%= bodyStyle %>"><%= bodyStyle %></option>
+      <option value="<%= bodyStyle.id %>"><%= bodyStyle.name %></option>
       <% } %>
     <% }) %>
   </select><br />

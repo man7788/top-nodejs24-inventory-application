@@ -108,3 +108,20 @@ exports.readCarFormOptions = async () => {
   const { rows } = await pool.query(queries);
   return rows;
 };
+
+exports.createCar = async (name, manufacturer, bodyStyle, price) => {
+  const queries = `
+  INSERT INTO
+    cars (
+      name, 
+      manufacturer_id, 
+      body_style_id, 
+      price
+    ) 
+  VALUES ($1, $2, $3, $4)
+  RETURNING id
+  `;
+  const values = [name, manufacturer, bodyStyle, price];
+  const { rows } = await pool.query(queries, values);
+  return rows;
+};

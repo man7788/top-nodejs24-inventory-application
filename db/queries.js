@@ -147,3 +147,16 @@ exports.updateCar = async (id, name, manufacturer, bodyStyle, price) => {
   const { rows } = await pool.query(queries, values);
   return rows;
 };
+
+exports.deleteCar = async (id) => {
+  const queries = `
+  DELETE FROM 
+    cars
+  WHERE 
+    cars.id = $1
+  RETURNING id;
+  `;
+  const values = [id];
+  const { rows } = await pool.query(queries, values);
+  return rows;
+};

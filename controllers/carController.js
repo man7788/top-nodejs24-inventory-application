@@ -105,28 +105,20 @@ exports.getCarUpdate = async (req, res) => {
 
 exports.postCarUpdate = [
   validateCar,
-  (req, res) => {
+  async (req, res) => {
     const errors = validationResult(req);
 
-    content = {
-      manufacturers: [
-        { id: 1, name: 'Honda' },
-        { id: 2, name: 'Toyota' },
-      ],
-      bodyStyles: [
-        { id: 1, type: 'Sedan' },
-        { id: 2, type: 'Coupe' },
-      ],
-      car: {
-        name: 'MR2',
-        manufacturer: 2,
-        bodyStyle: 2,
-        price: 100000,
-      },
-      errors: errors.array(),
-    };
-
     if (!errors.isEmpty()) {
+      const options = await db.readCarFormOptions();
+      const car = await db.readCarDetail(Number(req.params.id));
+
+      const content = {
+        manufacturers: options[0].manufacturers,
+        body_styles: options[0].body_styles,
+        car: car[0],
+        errors: errors.array(),
+      };
+
       return res.status(400).render('index', {
         title: 'Create Car',
         view: 'cars/carForm',
@@ -135,7 +127,15 @@ exports.postCarUpdate = [
     }
 
     const { name, manufacturer, bodystyle, price } = req.body;
-    res.send({ name, manufacturer, bodystyle, price });
+    const updated = await db.updateCar(
+      req.params.id,
+      name,
+      manufacturer,
+      bodystyle,
+      price
+    );
+
+    res.redirect(`/catalog/cars/${updated[0].id}`);
   },
 ];
 

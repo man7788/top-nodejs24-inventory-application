@@ -130,3 +130,20 @@ exports.createCar = async (name, manufacturer, bodyStyle, price) => {
   const { rows } = await pool.query(queries, values);
   return rows;
 };
+
+exports.updateCar = async (id, name, manufacturer, bodyStyle, price) => {
+  const queries = `
+  UPDATE cars
+  SET
+    name = $1,
+    manufacturer_id = $2,
+    body_style_id = $3,
+    price = $4
+  WHERE 
+    cars.id = $5
+  RETURNING id;
+  `;
+  const values = [name, manufacturer, bodyStyle, price, Number(id)];
+  const { rows } = await pool.query(queries, values);
+  return rows;
+};

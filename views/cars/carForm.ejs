@@ -30,9 +30,9 @@
   <br></br>
   <button type="submit">Submit</button>
 </form>
-<% if (errors) {%>
+<% if (content.errors) {%>
 <ul>
-  <%errors.forEach((error)=>{%>
+  <%content.errors.forEach((error)=>{%>
   <li><%= error.msg %></li>
   <%})%>
 </ul>

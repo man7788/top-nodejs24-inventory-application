@@ -51,13 +51,18 @@ exports.readCarDetail = async (carId) => {
     manufacturers.name AS manufacturer,
     body_styles.name AS body_style,
     cars.price AS price,
+  COALESCE(
     json_agg(
       jsonb_build_object(
         'id', car_instances.id,
         'production_date', car_instances.production_date,
         'sold_date', car_instances.sold_date
       )
-    ) AS car_instances  -- Aggregates car_instances as a JSON array
+      ORDER BY car_instances.production_date
+    ) FILTER (WHERE car_instances.id IS NOT NULL),
+    '[]'::json
+  ) AS car_instances
+
   FROM 
     cars
   LEFT JOIN 

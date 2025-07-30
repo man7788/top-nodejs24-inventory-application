@@ -1,5 +1,5 @@
 <h1><%=title %>: <%=content.car.name %></h1>
-<h3><%=content.car.manufacturer %> - <%=content.car.bodyStyle %></h3>
+<h3><%=content.car.manufacturer %> - <%=content.car.body_style %></h3>
 <% if (content.carInstances.length > 0) {%>
 <p>
   <strong
@@ -16,9 +16,9 @@
     >id: <a href="/catalog/carinstances/<%=instance.id %>"><%=instance.id %></a>
   </span>
 </dt>
-<dd>Production Date: <%=instance.productionDate %></dd>
-<% if (instance.soldDate) { %>
-<dd>Sold Date: <%=instance.soldDate %></dd>
+<dd>Production Date: <%=instance.production_date %></dd>
+<% if (instance.sold_date) { %>
+<dd>Sold Date: <%=instance.sold_date %></dd>
 <% } %> <% })%> <% } else { %>
 <p>Do you really want to delete this car?</p>
 <form method="POST" action="">

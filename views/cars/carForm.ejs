@@ -7,23 +7,21 @@
   <input type="text" id="name" name="name" placeholder='Name of car'  required='true' value="<%=(undefined===content.car ? '' : content.car.name)%>"/><br />
   <label for="manufacturer">Manufacturer:</label><br />
   <select id="manufacturer" name="manufacturer" required='true'>
-    <% content.manufacturers.forEach((manufacturer)=>{ %>
-      <% if (content.car) { %>
-      <option value="<%= manufacturer.id %>" selected="<%(manufacturer.id.toString()===content.car.manufacturer.toString() ? 'selected' : false )%>" ><%= manufacturer.name%></option>
-      <% } else { %>
-      <option value="<%= manufacturer.id %>"><%= manufacturer.name %></option>
-      <% } %>
-    <% }) %>
+  <% content.manufacturers.forEach((manufacturer) => { %>
+    <option value="<%= manufacturer.id %>" 
+      <%= content.car && manufacturer.name === content.car.manufacturer ? 'selected' : '' %>>
+      <%= manufacturer.name %>
+    </option>
+  <% }) %>
   </select><br />
   <label for="bodystyle">Body Style:</label><br />
   <select id="bodystyle" name="bodystyle" required='true'>
-     <% content.body_styles.forEach((bodyStyle)=>{ %>
-      <% if (content.car) { %>
-      <option value="<%= bodyStyle.id%>" selected="<%(bodyStyle.id.toString()===content.car.bodyStyle.toString() ? 'selected' : false )%>" ><%= bodyStyle.type%></option>
-      <% } else { %>
-      <option value="<%= bodyStyle.id %>"><%= bodyStyle.name %></option>
-      <% } %>
-    <% }) %>
+  <% content.body_styles.forEach((style) => { %>
+  <option value="<%= style.id %>" 
+    <%= content.car && style.name === content.car.body_style ? 'selected' : '' %>>
+    <%= style.name %>
+  </option>
+  <% }) %>
   </select><br />
   <label for="price">Price:</label><br />
   <input type="number" id="price" name="price" placeholder='Price of car' required='true' value="<%=(undefined===content.car ? '' : content.car.price)%>"/>

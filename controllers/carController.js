@@ -58,7 +58,6 @@ exports.getCarCreate = async (req, res) => {
     title: `Create Car`,
     view: 'cars/carForm',
     content: result[0],
-    errors: null,
   });
 };
 
@@ -69,11 +68,15 @@ exports.postCarCreate = [
 
     if (!errors.isEmpty()) {
       const result = await db.readCarFormOptions();
+      const content = {
+        manufacturers: result[0].manufacturers,
+        body_styles: result[0].body_styles,
+        errors: errors.array(),
+      };
       return res.status(400).render('index', {
         title: 'Create Car',
         view: 'cars/carForm',
-        content: result[0],
-        errors: errors.array(),
+        content,
       });
     }
 
@@ -83,7 +86,7 @@ exports.postCarCreate = [
   },
 ];
 
-exports.getCarUpdate = (req, res) => {
+exports.getCarUpdate = async (req, res) => {
   // Sort queries from database
   const content = {
     manufacturers: [
@@ -101,6 +104,10 @@ exports.getCarUpdate = (req, res) => {
       price: 100000,
     },
   };
+
+  const options = await db.readCarFormOptions();
+  const car = await db.readCarDetail(Number(req.params.id));
+
   res.render('index', {
     title: `Update Car`,
     view: 'cars/carForm',

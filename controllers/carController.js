@@ -139,33 +139,13 @@ exports.postCarUpdate = [
   },
 ];
 
-exports.getCarDelete = (req, res) => {
-  const content = {
-    car: {
-      id: 1,
-      name: 'Civic',
-      manufacturer: 'Honda',
-      bodyStyle: 'Sedan',
-      price: 100000,
-    },
-    carInstances: [],
-    // carInstances: [
-    //   {
-    //     id: 1,
-    //     productionDate: new Date(),
-    //     soldDate: new Date(),
-    //   },
-    //   {
-    //     id: 2,
-    //     productionDate: new Date(),
-    //     soldDate: null,
-    //   },
-    // ],
-  };
+exports.getCarDelete = async (req, res) => {
+  const result = await db.readCarDetail(Number(req.params.id));
+
   res.render('index', {
     title: `Delete Car`,
     view: 'cars/carDelete',
-    content: content,
+    content: { car: result[0], carInstances: result[0].car_instances },
   });
 };
 

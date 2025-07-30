@@ -143,7 +143,7 @@ exports.updateCar = async (id, name, manufacturer, bodyStyle, price) => {
     cars.id = $5
   RETURNING id;
   `;
-  const values = [name, manufacturer, bodyStyle, price, Number(id)];
+  const values = [name, manufacturer, bodyStyle, price, id];
   const { rows } = await pool.query(queries, values);
   return rows;
 };

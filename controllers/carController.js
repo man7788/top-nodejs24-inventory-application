@@ -128,7 +128,7 @@ exports.postCarUpdate = [
 
     const { name, manufacturer, bodystyle, price } = req.body;
     const updated = await db.updateCar(
-      req.params.id,
+      Number(req.params.id),
       name,
       manufacturer,
       bodystyle,

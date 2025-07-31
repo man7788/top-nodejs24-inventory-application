@@ -196,3 +196,17 @@ exports.readCarInstanceDetail = async (id) => {
   const { rows } = await pool.query(queries, values);
   return rows;
 };
+
+exports.readDeleteCarInstance = async (id) => {
+  const queries = `
+  SELECT 
+    *
+  FROM 
+    car_instances
+  WHERE 
+    id = $1
+  `;
+  const values = [id];
+  const { rows } = await pool.query(queries, values);
+  return rows;
+};

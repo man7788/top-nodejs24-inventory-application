@@ -1,6 +1,7 @@
 require('dotenv').config();
-const { Pool } = require('pg');
+const pg = require('pg');
+pg.types.setTypeParser(pg.types.builtins.DATE, (val) => val); // Returns the date string as is (e.g., 'YYYY-MM-DD')
 
-module.exports = new Pool({
+module.exports = new pg.Pool({
   connectionString: process.env.PGCONNECTSTRING,
 });

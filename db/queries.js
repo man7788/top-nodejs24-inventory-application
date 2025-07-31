@@ -1,5 +1,6 @@
 const pool = require('./pool');
 
+// CAR CONTROLLER QUERIES //
 exports.readHomeCounts = async () => {
   const queries = `
   SELECT
@@ -157,6 +158,39 @@ exports.deleteCar = async (id) => {
   WHERE 
     cars.id = $1
   RETURNING id;
+  `;
+  const values = [id];
+  const { rows } = await pool.query(queries, values);
+  return rows;
+};
+
+// CAR INSTANCE CONTROLLER QUERIES //
+exports.readCarInstanceDetail = async (id) => {
+  const queries = `
+  SELECT
+    cars.id AS car_id,
+    cars.name AS name,
+    manufacturers.name AS manufacturer,
+    body_styles.name AS body_style,
+    car_instances.id AS car_instance_id,
+    car_instances.production_date,
+    car_instances.sold_date
+  FROM
+    cars
+  INNER JOIN
+    car_instances
+  ON
+    cars.id = car_instances.car_id
+  INNER JOIN
+    manufacturers
+  ON
+    cars.manufacturer_id = manufacturers.id
+  INNER JOIN
+    body_styles
+  ON
+    cars.body_style_id = body_styles.id
+  WHERE
+    car_instances.id = $1;
   `;
   const values = [id];
   const { rows } = await pool.query(queries, values);

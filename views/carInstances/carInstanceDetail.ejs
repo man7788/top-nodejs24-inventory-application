@@ -1,6 +1,21 @@
-<h1>ID: <%=content.id %></h1>
-<p>Car: <%= content.name%></p>
-<p>Manufacturer: <%= content.manufacturer%></p>
-<p>Body Style: <%= content.bodyStyle%></p>
-<p>Price: <%= content.price%></p>
-<a href="<%=content.id%>/delete">Delete Car</a>
+<h1>ID: <%= content.car_instance_id %></h1>
+<p>
+  <strong>Car:</strong>
+  <a href="/catalog/cars/<%content.car_id%>"><%= content.name %></a>
+</p>
+<p><strong>Manufacturer: </strong> <%= content.manufacturer%></p>
+<p><strong>Body Style: </strong><%= content.body_style %></p>
+<p>
+  <strong>Status: </strong><% if (content.sold_date === null) { %>
+  <span>Available</span>
+  <% } else { %>
+  <span>Sold - <%= content.sold_date %></span>
+  <% } %>
+</p>
+
+<hr />
+<p>
+  <a href="/catalog/carinstances/<%=content.car_instance_id%>/delete"
+    >Delete Car Instance</a
+  >
+</p>

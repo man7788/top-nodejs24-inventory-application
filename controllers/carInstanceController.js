@@ -11,7 +11,7 @@ exports.getCarInstanceDetail = async (req, res) => {
 };
 
 exports.getCarInstanceDelete = async (req, res) => {
-  const result = await db.readDeleteCarInstance(Number(req.params.id));
+  const result = await db.readCarInstanceDelete(Number(req.params.id));
 
   res.render('index', {
     title: 'Delete Car Instance',

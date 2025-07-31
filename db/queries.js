@@ -197,7 +197,7 @@ exports.readCarInstanceDetail = async (id) => {
   return rows;
 };
 
-exports.readDeleteCarInstance = async (id) => {
+exports.readCarInstanceDelete = async (id) => {
   const queries = `
   SELECT 
     *

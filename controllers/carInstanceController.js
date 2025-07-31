@@ -20,15 +20,8 @@ exports.getCarInstanceDelete = async (req, res) => {
   });
 };
 
-exports.postCarInstanceDelete = (req, res) => {
-  content = {
-    id: 1,
-    name: 'Civic',
-    price: 100000,
-    manufacturer: 'Honda',
-    bodyStyle: 'Sedan',
-    productionDate: new Date(),
-    soldDate: new Date(),
-  };
-  res.send(req.body.carinstanceid);
+exports.postCarInstanceDelete = async (req, res) => {
+  await db.deleteCarInstance(Number(req.body.carinstanceid));
+
+  res.redirect('/catalog/cars');
 };

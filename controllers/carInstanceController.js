@@ -1,17 +1,12 @@
-exports.getCarInstanceDetail = (req, res) => {
-  content = {
-    id: 1,
-    name: 'Civic',
-    price: 100000,
-    manufacturer: 'Honda',
-    bodyStyle: 'Sedan',
-    productionDate: new Date(),
-    soldDate: new Date(),
-  };
+const db = require('../db/queries');
+
+exports.getCarInstanceDetail = async (req, res) => {
+  const result = await db.readCarInstanceDetail(Number(req.params.id));
+
   res.render('index', {
     title: 'Car Instance Detail',
     view: 'carInstances/carinstanceDetail',
-    content: content,
+    content: result[0],
   });
 };
 

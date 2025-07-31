@@ -210,3 +210,15 @@ exports.readDeleteCarInstance = async (id) => {
   const { rows } = await pool.query(queries, values);
   return rows;
 };
+
+exports.deleteCarInstance = async (id) => {
+  const queries = `
+  DELETE FROM 
+    car_instances
+  WHERE 
+    car_instances.id = $1;
+  `;
+  const values = [id];
+  const { rows } = await pool.query(queries, values);
+  return rows;
+};
